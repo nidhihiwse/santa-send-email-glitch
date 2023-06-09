@@ -1,7 +1,9 @@
-const {API_BASE_URL} = require('../Constants')
+const {API_BASE_URL} = require('./Constants')
 const axios = require('axios');
+const { addRecord, getAllRecords } = require('./DB');
 
 module.exports = {
+    // Function to fetch users API
     fetchUsers: async () => {
         try {
             const response = await axios.get(API_BASE_URL + '/users.json');
@@ -12,6 +14,7 @@ module.exports = {
           }
     },
 
+    // Function to check if user exists
     checkIfUserExists: async (userId) => {
 
         let allUsers = await module.exports.fetchUsers()
@@ -23,6 +26,7 @@ module.exports = {
 
     },
 
+    // Function to fetch all user profiles
     getAllUsersDetails: async () => {
 
         try {
@@ -42,17 +46,21 @@ module.exports = {
 
     },
 
-    isUserUnderAge: async (user, ageLimit) => {
+    // Function to check if user age is below 10
+    isUserUnderAge: async (data, user, ageLimit) => {
 
         // get details
         let userDetail = await module.exports.getUserDetails(user.uid);
         const age = await module.exports.calculateAge(userDetail.birthdate)
-        console.log(age)
         if(age < ageLimit) {
-            console.log(age, ageLimit, true)
+            addRecord({
+                id: data.id,
+                message: data.message,
+                address: userDetail.address
+            })
+            console.log(getAllRecords())
             return "underAge";
         } else {
-            console.log(age, ageLimit, false)
             return "overAge";
         }
     },

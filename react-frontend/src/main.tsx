@@ -5,8 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import ErrorPage from "./components/ErrorPage";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>{/* Missing code */}
-  <SantaForm/>
-  {/* <ErrorPage/> */}
+  <React.StrictMode>
+    <SantaForm/>
   </React.StrictMode>
 );
