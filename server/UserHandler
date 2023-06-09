@@ -1,0 +1,76 @@
+const {API_BASE_URL} = require('../Constants')
+const axios = require('axios');
+
+module.exports = {
+    fetchUsers: async () => {
+        try {
+            const response = await axios.get(API_BASE_URL + '/users.json');
+            return response.data;
+          } catch (error) {
+            console.log('Error:', error);
+            return null
+          }
+    },
+
+    checkIfUserExists: async (userId) => {
+
+        let allUsers = await module.exports.fetchUsers()
+        if (allUsers != null && allUsers.length > 0) {
+            return allUsers.find((user) => user.username == userId)
+        } else {
+            return null;
+        }
+
+    },
+
+    getAllUsersDetails: async () => {
+
+        try {
+            const response = await axios.get(API_BASE_URL + '/userProfiles.json');
+            return response.data;
+          } catch (error) {
+            console.log('Error:', error);
+            return null
+          }
+
+    },
+
+    getUserDetails: async (userId) => {
+
+        let allDetails = await module.exports.getAllUsersDetails()
+        return allDetails.find((details) => details.userUid === userId)
+
+    },
+
+    isUserUnderAge: async (user, ageLimit) => {
+
+        // get details
+        let userDetail = await module.exports.getUserDetails(user.uid);
+        const age = await module.exports.calculateAge(userDetail.birthdate)
+        console.log(age)
+        if(age < ageLimit) {
+            console.log(age, ageLimit, true)
+            return "underAge";
+        } else {
+            console.log(age, ageLimit, false)
+            return "overAge";
+        }
+    },
+
+    calculateAge: async(birthDateString) => {
+
+        const today = new Date();
+        const birthDate = new Date(birthDateString);
+
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        const dayDiff = today.getDate() - birthDate.getDate();
+
+        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+            age--;
+        }
+
+        return age;
+    }
+
+};
