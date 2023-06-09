@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import ErrorPage from './ErrorPage';
 import './SantaForm.css';
+import { useNavigate } from "react-router-dom";
 
 interface FormData {
   id: string;
@@ -21,6 +21,10 @@ function SantaForm() {
     }));
     console.log(name + " changed to " + value);
   }
+
+  const navigate = useNavigate();
+  const errorMessage1 = 'User age is over 10';
+  const errorMessage2 = 'User is not registered';
 
 
   const submitHandler = async (event: { preventDefault: () => void; }) => {
@@ -46,9 +50,9 @@ function SantaForm() {
       if(data === 'underAge') {
         alert('Message Send!');
       } else if (data === 'overAge') {
-        alert('User is Over age'); 
+        navigate('/error', { state: { replace: true, message: errorMessage1 }});
       } else {
-        alert('User is unregistered');
+        navigate('/error', { state: { replace: true, message: errorMessage2 }});
       }
     })
     .catch((error) => {

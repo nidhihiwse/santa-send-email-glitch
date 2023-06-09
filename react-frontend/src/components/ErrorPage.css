@@ -1,0 +1,23 @@
+.msg-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 750px;
+    background: #f1f3f4;
+    margin-top: 50px;
+    border-radius: 10px;
+    padding: 50px;
+}
+
+.msg-container .message {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.msg-container h2 {
+    margin: 30px 0;
+}
