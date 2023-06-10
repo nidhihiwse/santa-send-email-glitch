@@ -5,11 +5,13 @@ const nodemailer = require('nodemailer');
 module.exports = {
     sendEmail: () => {
 
-        console.log("sending emails...")
-
         let usersToSendEmail = getAllRecords()
-        console.log(usersToSendEmail)
-        if(usersToSendEmail.length == 0) return;
+        if(usersToSendEmail.length == 0) {
+            console.log("tried to send emails, but no pending message")
+            return;
+        } else {
+            console.log("sending "+usersToSendEmail.length+" emails to santa...")
+        }
 
         var mailMessage = "";
         usersToSendEmail.forEach((user) => {
@@ -18,7 +20,6 @@ module.exports = {
             mailMessage += "\nMessage: "+user.message
             mailMessage += "\n================="
         });
-        console.log(mailMessage);
 
         const transporter = nodemailer.createTransport({
             host: 'smtp.ethereal.email',
@@ -42,8 +43,7 @@ module.exports = {
                 console.error('Error sending email:', err);
             } else {
                 removeAllRecords()
-                console.log('Email sent successfully!\n\n'+mailMessage);
-                console.log('Preview URL:', nodemailer.getTestMessageUrl(info));
+                console.log('Send success! Preview URL for mail: => ', nodemailer.getTestMessageUrl(info));
             }
         });
 
