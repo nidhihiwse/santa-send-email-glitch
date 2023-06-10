@@ -35,6 +35,16 @@
     </header>
 
     <main>
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <!-- HTML content to display -->
+                <div id="modalHtmlContent">
+                    <!-- HTML text goes here -->
+                </div>
+                <button onclick="closeModal()">Close</button>
+            </div>
+        </div>
       <p class="bold">Ho ho ho, what you want for Christmas?</p>
 
       who are you?
@@ -53,6 +63,17 @@
         <button type="submit" onClick="formDataHandler()" id="submit-letter">Send</button>
       </form>
       <script>
+        function openModal(htmlContent) {
+            var modal = document.getElementById('myModal');
+            document.getElementById('modalHtmlContent').innerHTML = htmlContent;
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
+
         function formDataHandler() {
             event.preventDefault(); // Prevent form submission
 
@@ -61,11 +82,9 @@
 
             // Create an object with the data to send
             var formData = {
-              userid: userid,
-              wish: wish
+              id: userid,
+              message: wish
             };
-
-            console.log(formData);
 
             fetch('http://localhost:3000/send', {
               method: 'POST',
@@ -75,24 +94,14 @@
               }
             }).then((response) => {
               if (response.ok) {
-                response.
                 return response.text();
               } else {
                 throw new Error('Request failed');
               }
             })
-            // .then((data) => {
-            //   console.log(data); 
-            //   if(data === 'underAge') {
-            //     alert('Message Send!');
-            //   } else if (data === 'overAge') {
-            //     window.alert("User is over age 10")
-            //   } else {
-            //     window.alert("User is not registered")
-            //   }
-            // })
             .then(html => {
-            document.getElementById('content').innerHTML = html;
+                console.log(html);
+                openModal(html)
             })
             .catch((error) => {
               console.log(error);
