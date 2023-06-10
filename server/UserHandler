@@ -58,7 +58,6 @@ module.exports = {
                 message: data.message,
                 address: userDetail.address
             })
-            console.log(getAllRecords())
             return "underAge";
         } else {
             return "overAge";
