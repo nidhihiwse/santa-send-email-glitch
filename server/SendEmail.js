@@ -10,7 +10,8 @@ module.exports = {
             console.log("tried to send emails, but no pending message")
             return;
         } else {
-            console.log("sending "+usersToSendEmail.length+" emails to santa...")
+            console.log("sending email to santa...")
+            removeAllRecords()
         }
 
         var mailMessage = "";
@@ -42,8 +43,7 @@ module.exports = {
             if (err) {
                 console.error('Error sending email:', err);
             } else {
-                removeAllRecords()
-                console.log('Send success! Preview URL for mail: => ', nodemailer.getTestMessageUrl(info));
+                console.log(usersToSendEmail.length+' messages sent successfully! Preview URL for mail: => \n', nodemailer.getTestMessageUrl(info));
             }
         });
 

@@ -26,7 +26,6 @@ app.get('/test', async (request, response) => {
 
 app.post('/send', async (request, response) => {
   let data = request.body;
-  console.log(data)
   let user = await checkIfUserExists(data.id)
   if (user) { // user is present and registered
     let ageRes = await isUserUnderAge(data, user, 10);

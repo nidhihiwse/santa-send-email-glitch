@@ -3,7 +3,7 @@ const fakeDB = [];
 // Function to add a new record to the database
 const addRecord = (record) => {
   fakeDB.push(record);
-  console.log('Message added to local DB:', record);
+  console.log('Message added to local DB:', JSON.stringify(record));
 };
 
 // Function to retrieve all records from the database
@@ -13,7 +13,7 @@ const getAllRecords = () => {
 
 // Function to remove all records from the database
 const removeAllRecords = () => {
-    console.log('Local DB cleared:', record);
+    console.log('Local DB cleared');
     return fakeDB.length = 0;
 };
 
