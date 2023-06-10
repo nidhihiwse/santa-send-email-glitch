@@ -20,6 +20,10 @@ app.get('/', async (request, response) => {
   response.sendFile(__dirname + '/views/index.html');
 })
 
+app.get('/test', async (request, response) => {
+  response.send("Working");
+})
+
 app.post('/send', async (request, response) => {
   let data = request.body;
   console.log(data)
