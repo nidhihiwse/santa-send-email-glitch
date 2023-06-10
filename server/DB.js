@@ -13,7 +13,6 @@ const getAllRecords = () => {
 
 // Function to remove all records from the database
 const removeAllRecords = () => {
-    console.log('Local DB cleared');
     return fakeDB.length = 0;
 };
 
