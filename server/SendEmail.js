@@ -13,7 +13,7 @@ module.exports = {
 
         var mailMessage = "";
         usersToSendEmail.forEach((user) => {
-            mailMessage += "Children Name: "+user.id
+            mailMessage += "\nChildren Name: "+user.id
             mailMessage += "\nAddress: "+user.address
             mailMessage += "\nMessage: "+user.message
             mailMessage += "\n================="

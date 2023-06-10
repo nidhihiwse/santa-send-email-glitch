@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start:vite": "vite --port 3000",
-    "start": "node -r dotenv/config ./server"
+    "start": "node -r dotenv/config ./server",
+    "test": "jest"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^3.1.0",
