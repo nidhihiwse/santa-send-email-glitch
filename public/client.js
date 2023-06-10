@@ -37,6 +37,7 @@ function formDataHandler() {
     message: wish
   };
 
+  //fetch('http://127.0.0.1:3000/send', {
   fetch('https://foregoing-kiwi-giver.glitch.me/send', {
     method: 'POST',
     body: JSON.stringify(formData),

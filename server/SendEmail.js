@@ -5,13 +5,10 @@ const nodemailer = require('nodemailer');
 module.exports = {
     sendEmail: () => {
 
-        let usersToSendEmail = getAllRecords()
+        let usersToSendEmail = JSON.parse(JSON.stringify(getAllRecords()))
+        removeAllRecords()
         if(usersToSendEmail.length == 0) {
-            console.log("tried to send emails, but no pending message")
             return;
-        } else {
-            console.log("sending email to santa...")
-            removeAllRecords()
         }
 
         var mailMessage = "";
